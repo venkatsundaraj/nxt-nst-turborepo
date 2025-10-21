@@ -19,7 +19,9 @@ const ThemeImage = (props: Props) => {
 };
 
 export default async function Home() {
-  const data = await fetch(`${process.env.SERVER_URL}/users/hello/hello`);
+  const data = await fetch(
+    `https://nxt-nst-turborepo.onrender.com/users/hello/hello`
+  );
   const user: User = await data.json();
 
   return (
