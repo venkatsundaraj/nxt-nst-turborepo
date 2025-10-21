@@ -1,7 +1,7 @@
 import Image, { type ImageProps } from "next/image";
 import { Button } from "@repo/ui/button";
 import styles from "./page.module.css";
-
+import { User } from "@repo/api";
 type Props = Omit<ImageProps, "src"> & {
   srcLight: string;
   srcDark: string;
@@ -18,7 +18,10 @@ const ThemeImage = (props: Props) => {
   );
 };
 
-export default function Home() {
+export default async function Home() {
+  const data = await fetch(`${process.env.SERVER_URL}/users/hello/hello`);
+  const user: User = await data.json();
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -31,6 +34,9 @@ export default function Home() {
           height={38}
           priority
         />
+        <Button appName="hello world">
+          {user.name} - {user.age}
+        </Button>
         <ol>
           <li>
             Get started by editing <code>apps/web/app/page.tsx</code>
